@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Yummy</title>
+</head>
+
+<body>
+    <section id="loading">
+        <div class="w-100 h-100 d-flex justify-content-center align-items-center">
+            <i class="fas fa-spinner fa-5x text-white fa-spin"></i>
+        </div>
+    </section>
+    <nav class="bg-danger d-flex">
+        <div id="inner-nav" class="inner-nav text-white p-4">
+            <div class="nav-items">
+                <ul class="list-unstyled text-capitalize overflow-hidden">
+                    <li id="search">search</li>
+                    <li id="categories">categories</li>
+                    <li id="area">area</li>
+                    <li id="ingredients">ingredients</li>
+                    <li id="contact">contact us</li>
+                </ul>
+            </div>
+            <div class="footer">
+                <div class="nav-social">
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+                <p>Copyright Â© 2019 All Rights<br>Reserved.</p>
+            </div>
+        </div>
+        <div
+            class="toggle-nav bg-white text-black px-2 py-4 d-flex flex-column justify-content-between align-items-center">
+            <img src="images/logo.png" alt="">
+            <i id="nav-menu" class="fa-solid fa-align-justify fa-2x"></i>
+            <i id="nav-exit" class="fa-solid fa-x fa-2x"></i>
+            <div class="d-flex flex-column gap-1">
+                <i class="fa-solid fa-globe"></i>
+                <i class="fa-solid fa-share-nodes"></i>
+            </div>
+        </div>
+    </nav>
+    <section class="nav-items-details">
+        <div class="search">
+            <div class="container w-75">
+                <div class="row py-4">
+                    <div class="col-md-6">
+                        <input id="name-search" class="form-control bg-transparent text-white" type="text" placeholder="Search By Name">
+                    </div>
+                    <div class="col-md-6">
+                        <input id="first-letter-search" class="form-control bg-transparent text-white" type="text" placeholder="Search By First Letter" maxlength="1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="categories">
+            <div class="container">
+                <div id="categories-items" class="row py-5 gy-4"></div>
+            </div>
+        </div>
+        <div class="area">
+            <div class="container">
+                <div id="area-items" class="row gy-4 py-5"></div>
+            </div>
+        </div>
+        <div class="ingredients">
+            <div class="container">
+                <div id="ingredients-items" class="row gy-4 py-5"></div>
+            </div>
+        </div>
+        <div class="contact">
+            <div class="container w-75 text-center">
+                <div class="input-fields row gy-4 mt-5">
+                    <div class="col-md-5 offset-md-1">
+                        <input class="form-control" type="text" name="" id="name-input" placeholder="Enter Your Name">
+                        <div id="name-alert" class="alert alert-danger my-2">Special characters and numbers not allowed</div>
+                    </div>
+                    <div class="col-md-5">
+                        <input class="form-control" type="email" name="" id="email-input" placeholder="Enter Your Email">
+                        <div id="email-alert" class="alert alert-danger my-2">Email not valid *exemple@yyy.zzz</div>
+                    </div>
+                    <div class="col-md-5 offset-md-1">
+                        <input class="form-control" type="tel" name="" id="phone-input" placeholder="Enter Your Phone">
+                        <div id="phone-alert" class="alert alert-danger my-2">Enter valid Phone Number</div>
+                    </div>
+                    <div class="col-md-5">
+                        <input class="form-control" type="number" name="" id="age-input" placeholder="Enter Your Age">
+                        <div id="age-alert" class="alert alert-danger my-2">Enter valid age</div>
+                    </div>
+                    <div class="col-md-5 offset-md-1">
+                        <input class="form-control" type="password" name="" id="password-input" placeholder="Enter Your Password">
+                        <div id="password-alert" class="alert alert-danger my-2">Enter valid password *Minimum eight characters, at least one letter and one number:*</div>
+                    </div>
+                    <div class="col-md-5">
+                        <input class="form-control" type="password" name="" id="repassword-input" placeholder="Repassword">
+                        <div id="repassword-alert" class="alert alert-danger my-2">Enter valid repassword</div>
+                    </div>
+                </div>
+                <button class="btn btn-outline-danger my-3 disabled">Submit</button>
+            </div>
+        </div>
+    </section>
+    <section class="meals">
+        <div class="container">
+            <div id="meals-items" class="row py-5 gy-4"></div>
+        </div>
+    </section>
+    <section class="details">
+        <div class="container">
+            <div id="meal" class="row text-white py-5"></div>
+        </div>
+    </section>
+    <script src="js/jquery-3.6.3.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

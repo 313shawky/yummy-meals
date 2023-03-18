@@ -1,0 +1,55 @@
+body{
+    background-color: #0d0d0d;
+    overflow: hidden;
+}
+
+#loading{
+    background-color: #0d0d0d;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 99999;
+}
+
+nav{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 9999;
+}
+
+.toggle-nav img{
+    width: 50px;
+}
+
+.inner-nav{
+    background-color: #0d0d0d;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nav-items ul li{
+    padding: 8px 0;
+    position: relative;
+}
+
+.search ::placeholder{
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+.item-layer{
+    background-color: rgba(249, 246, 246, 0.79);
+    top: 100%;
+    transition: top 0.5s;
+}
+
+.item:hover .item-layer{
+    top: 0;
+}
+
+.nav-items ul li, i, .item{
+    cursor: pointer;
+}
