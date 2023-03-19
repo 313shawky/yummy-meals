@@ -1,6 +1,6 @@
 $(function () {
     $('.nav-items-details').children().hide();
-    $('#loading').fadeOut(1500, function(){
+    $('#loading').fadeOut(1500, function () {
         $('body').css('overflow', 'auto');
     });
 
@@ -9,41 +9,41 @@ $(function () {
     $('#nav-exit').hide();
     $('#nav-menu').show();
 
-    function animateNav(){
+    function animateNav() {
         $('#nav-exit').hide();
         $('#nav-menu').show();
-        $('nav').animate({left: -navWidth}, 500);
+        $('nav').animate({ left: -navWidth }, 500);
     }
 
 
     let listHeight = $('.nav-items ul').innerHeight();
     $('.nav-items ul li').css('top', listHeight);
 
-    $('#nav-menu').click(function(){
+    $('#nav-menu').click(function () {
         $('#nav-menu').hide();
         $('#nav-exit').show();
-        $('nav').animate({left: 0}, 500);
+        $('nav').animate({ left: 0 }, 500);
         for (let i = 0; i < 5; i++) {
-            $(".nav-items ul li").eq(i).animate({top: 0}, (i + 5) * 100);
+            $(".nav-items ul li").eq(i).animate({ top: 0 }, (i + 5) * 100);
         }
     })
 
-    $('#nav-exit').click(function(){
+    $('#nav-exit').click(function () {
         $('#nav-exit').hide();
         $('#nav-menu').show();
-        $('nav').animate({left: -navWidth}, 500);
+        $('nav').animate({ left: -navWidth }, 500);
         for (let i = 4; i >= 0; i--) {
-            $(".nav-items ul li").eq(i).animate({top: listHeight}, (i + 5) * 100);
+            $(".nav-items ul li").eq(i).animate({ top: listHeight }, (i + 5) * 100);
         }
     })
 
     getMeals('search.php?s=');
 
-    async function getMeals(meal){
+    async function getMeals(meal) {
         let apiResponse = await fetch(`https://www.themealdb.com/api/json/v1/1/${meal}`);
         let result = await apiResponse.json();
         displayMeals(result.meals);
-        $('#meals-items').children().click(async function(){
+        $('#meals-items').children().click(async function () {
             displayLoading();
             let apiResponse = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${$(this).attr('id')}`);
             let result = await apiResponse.json();
@@ -55,9 +55,9 @@ $(function () {
         });
     }
 
-    function displayMeals(arr){
+    function displayMeals(arr) {
         var box = ``;
-        for(let i = 0; i < arr.length; i++){
+        for (let i = 0; i < arr.length; i++) {
             box += `<div id="${arr[i].idMeal}" class="col-md-3">
                         <div class="item position-relative overflow-hidden rounded-2">
                             <img class="w-100" src=${arr[i].strMealThumb} alt="">
@@ -70,7 +70,7 @@ $(function () {
         $('#meals-items').html(box);
     }
 
-    function displayMealDetails(meal){
+    function displayMealDetails(meal) {
         var box = `<div class="col-md-4">
                         <img class="w-100 rounded-3" src=${meal.strMealThumb} alt="">
                         <h2>${meal.strMeal}</h2>
@@ -90,18 +90,18 @@ $(function () {
         $('#meal').html(box);
 
         let mealMap = new Map(Object.entries(meal));
-        for(let i = 1; i < 20; i++){
-            if(mealMap.get('strIngredient' + i) !== "" && mealMap.get('strIngredient' + i) !== null){
+        for (let i = 1; i < 20; i++) {
+            if (mealMap.get('strIngredient' + i) !== "" && mealMap.get('strIngredient' + i) !== null) {
                 $('#recipes').append(`<span class="alert alert-info p-1 m-2">${mealMap.get('strMeasure' + i)} ${mealMap.get('strIngredient' + i)}</span>`)
             }
-            else{
+            else {
                 continue;
             }
         }
 
-        if(meal.strTags !== null){
+        if (meal.strTags !== null) {
             let mealTags = meal.strTags.split(",");
-            for(let tag of mealTags){
+            for (let tag of mealTags) {
                 $('#tags').append(`<span class="alert alert-danger p-1 m-2">${tag}</span>`);
             }
         }
@@ -109,22 +109,22 @@ $(function () {
 
 
 
-    async function getCategories(){
+    async function getCategories() {
         let apiResponse = await fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`);
         let result = await apiResponse.json();
         displayCategories(result.categories);
         $('#categories-items').children().click(getCategoryDetails);
     }
 
-    function getCategoryDetails(){
+    function getCategoryDetails() {
         getMeals(`filter.php?c=${$(this).attr('category')}`);
         $('.categories').hide();
         $('.meals').show();
     }
 
-    function displayCategories(arr){
+    function displayCategories(arr) {
         var box = ``;
-        for(let i = 0; i < arr.length; i++){
+        for (let i = 0; i < arr.length; i++) {
             box += `<div category="${arr[i].strCategory}" class="col-md-3">
                         <div class="item position-relative overflow-hidden rounded-2">
                             <img class="w-100" src=${arr[i].strCategoryThumb} alt="">
@@ -138,22 +138,22 @@ $(function () {
         $('#categories-items').html(box);
     }
 
-    async function getArea(){
+    async function getArea() {
         let apiResponse = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?a=list`);
         let result = await apiResponse.json();
         displayArea(result.meals);
         $('#area-items').children().click(getAreaDetails);
     }
 
-    function getAreaDetails(){
+    function getAreaDetails() {
         getMeals(`filter.php?a=${$(this).attr('area')}`);
-            $('.area').hide();
-            $('.meals').show();
+        $('.area').hide();
+        $('.meals').show();
     }
 
-    function displayArea(arr){
+    function displayArea(arr) {
         var box = ``;
-        for(let i = 0; i < arr.length; i++){
+        for (let i = 0; i < arr.length; i++) {
             box += `<div area="${arr[i].strArea}" class="col-md-3">
                         <div class="item text-white text-center">
                             <i class="fa-solid fa-house-laptop fa-4x"></i>
@@ -164,22 +164,22 @@ $(function () {
         $('#area-items').html(box);
     }
 
-    async function getIngredients(){
+    async function getIngredients() {
         let apiResponse = await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`);
         let result = await apiResponse.json();
         displayIngredients(result.meals);
         $('#ingredients-items').children().click(getIngredientDetails);
     }
 
-    function getIngredientDetails(){
+    function getIngredientDetails() {
         getMeals(`filter.php?i=${$(this).attr('ingredients')}`);
         $('.ingredients').hide();
         $('.meals').show();
     }
 
-    function displayIngredients(arr){
+    function displayIngredients(arr) {
         var box = ``;
-        for(let i = 0; i < 20; i++){
+        for (let i = 0; i < 20; i++) {
             box += `<div ingredients=${arr[i].strIngredient} class="col-md-3">
                         <div class="item text-white text-center">
                             <i class="fa-solid fa-drumstick-bite fa-4x"></i>
@@ -191,64 +191,64 @@ $(function () {
         $('#ingredients-items').html(box);
     }
 
-    $('.nav-items ul').children().click(function(){
+    $('.nav-items ul').children().click(function () {
         $('.meals').hide();
         $('.details').hide();
         for (let i = 4; i >= 0; i--) {
-            $(".nav-items ul li").eq(i).animate({top: listHeight}, (i + 5) * 100);
+            $(".nav-items ul li").eq(i).animate({ top: listHeight }, (i + 5) * 100);
         }
         animateNav();
     })
 
-    $('#search').click(function(){
+    $('#search').click(function () {
         $('.nav-items-details .search').siblings().hide();
         $('.nav-items-details .search').show();
     })
 
-    $('#name-search').keyup(function(){
+    $('#name-search').keyup(function () {
         displayLoading();
         getMeals(`search.php?s=${$('#name-search').val()}`);
         $('.meals').show();
     })
 
-    $('#first-letter-search').keyup(function(){
+    $('#first-letter-search').keyup(function () {
         displayLoading();
-        if($('#first-letter-search').val() == ""){
+        if ($('#first-letter-search').val() == "") {
             getMeals(`search.php?f=a`);
         }
-        else{
+        else {
             getMeals(`search.php?f=${$('#first-letter-search').val()}`);
         }
         $('.meals').show();
     })
 
-    $('#categories').click(function(){
+    $('#categories').click(function () {
         displayLoading();
         $('.nav-items-details .categories').siblings().hide();
         $('.nav-items-details .categories').show();
         getCategories();
     })
-    
-    $('#area').click(function(){
+
+    $('#area').click(function () {
         displayLoading();
         $('.nav-items-details .area').siblings().hide();
         $('.nav-items-details .area').show();
         getArea();
     })
 
-    $('#ingredients').click(function(){
+    $('#ingredients').click(function () {
         displayLoading();
         $('.nav-items-details .ingredients').siblings().hide();
         $('.nav-items-details .ingredients').show();
         getIngredients();
     })
 
-    $('#contact').click(function(){
+    $('#contact').click(function () {
         $('.nav-items-details .contact').siblings().hide();
         $('.nav-items-details .contact').show();
     })
 
-    function displayLoading(){
+    function displayLoading() {
         $('#loading').fadeIn(300);
         $('#loading').fadeOut(300);
         $('nav').css('z-index', '999999')
@@ -260,57 +260,91 @@ $(function () {
     const agePattern = /^[1-9][0-9]?$/;
     const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
-    $('#name-input').keyup(function(){
-        if(namePattern.test($('#name-input').val())){
-            $('#name-alert').hide();
-        }
-        else{
-            $('#name-alert').show();
-        }
-    })
+    $('.input-fields .col-md-5 input').keyup(validateAll);
+    $('.input-fields .col-md-5 .alert').addClass('d-none');
 
-    $('#email-input').keyup(function(){
-        if(emailPattern.test($('#email-input').val())){
-            $('#email-alert').hide();
-        }
-        else{
-            $('#email-alert').show();
-        }
-    })
+    function validateAll() {
+        
+        $('#name-input').keyup(function(){
+            if (!validateName()) {
+                $('#name-alert').removeClass('d-none');
+            }
+            else {
+                $('#name-alert').addClass('d-none');
+            }
+        });
 
-    $('#phone-input').keyup(function(){
-        if(phonePattern.test($('#phone-input').val())){
-            $('#phone-alert').hide();
-        }
-        else{
-            $('#phone-alert').show();
-        }
-    })
+        $('#email-input').keyup(function(){
+            if (!validateEmail()) {
+                $('#email-alert').removeClass('d-none');
+            }
+            else {
+                $('#email-alert').addClass('d-none');
+            }
+        });
 
-    $('#age-input').keyup(function(){
-        if(agePattern.test($('#age-input').val())){
-            $('#age-alert').hide();
-        }
-        else{
-            $('#age-alert').show();
-        }
-    })
-    $('#password-input').keyup(function(){
-        if(passwordPattern.test($('#password-input').val())){
-            $('#password-alert').hide();
-        }
-        else{
-            $('#password-alert').show();
-        }
-    })
+        $('#phone-input').keyup(function(){
+            if (!validatePhone()) {
+                $('#phone-alert').removeClass('d-none');
+            }
+            else {
+                $('#phone-alert').addClass('d-none');
+            }
+        });
 
-    $('#repassword-input').keyup(function(){
-        if($('#repassword-input').val() == $('#password-input').val()){
-            $('#repassword-alert').hide();
+        $('#age-input').keyup(function(){
+            if (!validateAge()) {
+                $('#age-alert').removeClass('d-none');
+            }
+            else {
+                $('#age-alert').addClass('d-none');
+            }
+        });
+
+        $('#password-input').keyup(function(){
+            if (!validatePassword()) {
+                $('#password-alert').removeClass('d-none');
+            }
+            else {
+                $('#password-alert').addClass('d-none');
+            }
+        });
+
+        $('#repassword-input').keyup(function(){
+            if (!validateRepassword()) {
+                $('#repassword-alert').removeClass('d-none');
+            }
+            else {
+                $('#repassword-alert').addClass('d-none');
+            }
+        });
+
+        function validateName() {
+            return namePattern.test($('#name-input').val());
         }
-        else{
-            $('#repassword-alert').show();
+
+        function validateEmail() {
+            return emailPattern.test($('#email-input').val());
         }
-    })
-    
+
+        function validatePhone() {
+            return phonePattern.test($('#phone-input').val());
+        }
+
+        function validateAge() {
+            return agePattern.test($('#age-input').val());
+        }
+
+        function validatePassword() {
+            return passwordPattern.test($('#password-input').val());
+        }
+
+        function validateRepassword() {
+            return $('#repassword-input').val() == $('#password-input').val();
+        }
+
+        if (validateName() && validateEmail() && validatePhone() && validateAge() && validatePassword() && validateRepassword()) {
+            $('#submit').removeClass('disabled');
+        }
+    }
 })
